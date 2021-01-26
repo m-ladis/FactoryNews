@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PlavaTvornicaZadatak</string>
+    <string name="hello_last_news_fragment">Hello last news fragment</string>
+    <string name="hello_story_fragment">Hello story fragment</string>
 </resources>
