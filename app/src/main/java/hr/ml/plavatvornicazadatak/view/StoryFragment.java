@@ -12,6 +12,8 @@ import hr.ml.plavatvornicazadatak.R;
 
 public class StoryFragment extends Fragment {
 
+    public StoryFragment() {}
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
