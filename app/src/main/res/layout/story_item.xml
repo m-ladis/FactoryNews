@@ -16,10 +16,11 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_toEndOf="@id/story_item_image"
+        android:foreground="@drawable/story_item_title_gradient"
         android:maxLines="2"
+        android:minLines="2"
         android:textColor="@color/black"
-        android:textColorHighlight="#FFFFFF"
         android:textSize="20sp"
-        tools:text="@string/lorem_ipsum_title"/>
+        tools:text="@string/lorem_ipsum_title" />
 
 </RelativeLayout>
