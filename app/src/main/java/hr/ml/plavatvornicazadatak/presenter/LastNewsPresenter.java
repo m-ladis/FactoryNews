@@ -23,11 +23,13 @@ public class LastNewsPresenter implements LastNewsIPresenter, ArticlesRequestLis
 
     @Override
     public void requestLastNews() {
+        view.setProgressBarVisibility(true);
         newsRepository.requestArticles();
     }
 
     @Override
     public void articlesReadyToShow(List<Article> articles) {
         view.setArticles(articles);
+        view.setProgressBarVisibility(false);
     }
 }

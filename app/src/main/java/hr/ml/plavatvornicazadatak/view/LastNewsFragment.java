@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class LastNewsFragment extends Fragment implements LastNewsIFragment {
     private LastNewsIPresenter presenter;
 
     private RecyclerView lastNewsRecyclerView;
+    private ProgressBar progressCircular;
 
     private NewsAdapter newsAdapter;
 
@@ -38,6 +40,7 @@ public class LastNewsFragment extends Fragment implements LastNewsIFragment {
 
         // bind views
         lastNewsRecyclerView = rootView.findViewById(R.id.last_news_recycler_view);
+        progressCircular = rootView.findViewById(R.id.progress_circular);
 
         newsAdapter = new NewsAdapter(getContext());
         lastNewsRecyclerView.setAdapter(newsAdapter);
@@ -51,5 +54,11 @@ public class LastNewsFragment extends Fragment implements LastNewsIFragment {
     public void setArticles(List<Article> articles) {
         newsAdapter.setArticles(articles);
         newsAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setProgressBarVisibility(boolean visibility) {
+        if (visibility) progressCircular.setVisibility(View.VISIBLE);
+        else progressCircular.setVisibility(View.GONE);
     }
 }

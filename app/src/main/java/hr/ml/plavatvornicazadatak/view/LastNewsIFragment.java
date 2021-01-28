@@ -8,4 +8,6 @@ public interface LastNewsIFragment {
 
     void setArticles(List<Article> articles);
 
+    void setProgressBarVisibility(boolean visibility);
+
 }
