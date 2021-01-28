@@ -13,10 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import hr.ml.plavatvornicazadatak.R;
+import hr.ml.plavatvornicazadatak.listener.LastNewsFragmentNavigationListener;
 import hr.ml.plavatvornicazadatak.model.entity.Article;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
     private Context context;
+    private LastNewsFragmentNavigationListener lastNewsFragmentNavigationListener;
     private List<Article> articles;
 
     public NewsAdapter(Context context) {
@@ -47,6 +49,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         this.articles = articles;
     }
 
+    public void setListener(LastNewsFragmentNavigationListener lastNewsFragmentNavigationListener) {
+        this.lastNewsFragmentNavigationListener = lastNewsFragmentNavigationListener;
+    }
+
     public class NewsViewHolder extends RecyclerView.ViewHolder{
 
         private TextView storyItemTitle;
@@ -57,6 +63,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
             storyItemTitle = itemView.findViewById(R.id.story_item_title);
             storyItemImage = itemView.findViewById(R.id.story_item_image);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lastNewsFragmentNavigationListener.navigateToArticle(getItemId());
+                }
+            });
         }
     }
 }
