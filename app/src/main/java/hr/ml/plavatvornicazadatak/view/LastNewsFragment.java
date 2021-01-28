@@ -31,7 +31,7 @@ public class LastNewsFragment extends Fragment implements LastNewsIFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        presenter = new LastNewsPresenter(this);
+        presenter = new LastNewsPresenter(getActivity().getApplication(), this);
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_last_news, container, false);
@@ -42,7 +42,7 @@ public class LastNewsFragment extends Fragment implements LastNewsIFragment {
         newsAdapter = new NewsAdapter(getContext());
         lastNewsRecyclerView.setAdapter(newsAdapter);
 
-        presenter.showLastNews();
+        presenter.requestLastNews();
 
         return rootView;
     }

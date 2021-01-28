@@ -1,6 +1,8 @@
 package hr.ml.plavatvornicazadatak.presenter;
 
 
+import android.app.Application;
+
 import java.util.List;
 
 import hr.ml.plavatvornicazadatak.listener.ArticlesRequestListener;
@@ -13,19 +15,19 @@ public class LastNewsPresenter implements LastNewsIPresenter, ArticlesRequestLis
     private LastNewsIFragment view;
     private NewsRepository newsRepository;
 
-    public LastNewsPresenter(LastNewsIFragment view) {
-        this.newsRepository = new NewsRepository();
+    public LastNewsPresenter(Application application, LastNewsIFragment view) {
+        this.newsRepository = new NewsRepository(application);
         this.view = view;
         newsRepository.setArticlesRequestListener(this);
     }
 
     @Override
-    public void showLastNews() {
-        newsRepository.requestAllArticles();
+    public void requestLastNews() {
+        newsRepository.requestArticles();
     }
 
     @Override
-    public void articlesReady(List<Article> articles) {
+    public void articlesReadyToShow(List<Article> articles) {
         view.setArticles(articles);
     }
 }

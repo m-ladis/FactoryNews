@@ -1,6 +1,16 @@
 package hr.ml.plavatvornicazadatak.model.entity;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "article",
+        indices = {@Index(value = "title", unique = true)})
 public class Article {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
     private String author;
     private String title;
     private String description;
@@ -9,14 +19,8 @@ public class Article {
     private String uriToImage;
     private Long publishedAt;
 
-    public Article(String author, String title, String description, String url,
-                   String urlToImage, Long publishedAt) {
-        this.author = author;
-        this.title = title;
-        this.description = description;
-        this.url = url;
-        this.urlToImage = urlToImage;
-        this.publishedAt = publishedAt;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setAuthor(String author) {
@@ -45,6 +49,14 @@ public class Article {
 
     public void setUriToImage(String uriToImage) {
         this.uriToImage = uriToImage;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getUriToImage() {
+        return uriToImage;
     }
 
     public String getAuthor() {
