@@ -15,8 +15,8 @@ public class LastNewsPresenter implements LastNewsIPresenter, ArticlesRequestLis
     private LastNewsIFragment view;
     private NewsRepository newsRepository;
 
-    public LastNewsPresenter(Application application, LastNewsIFragment view) {
-        this.newsRepository = new NewsRepository(application);
+    public LastNewsPresenter(NewsRepository newsRepository, LastNewsIFragment view) {
+        this.newsRepository = newsRepository;
         this.view = view;
         newsRepository.setArticlesRequestListener(this);
     }

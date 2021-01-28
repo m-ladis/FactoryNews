@@ -18,6 +18,7 @@ import hr.ml.plavatvornicazadatak.R;
 import hr.ml.plavatvornicazadatak.adapter.NewsAdapter;
 import hr.ml.plavatvornicazadatak.listener.LastNewsFragmentNavigationListener;
 import hr.ml.plavatvornicazadatak.model.entity.Article;
+import hr.ml.plavatvornicazadatak.model.repository.NewsRepository;
 import hr.ml.plavatvornicazadatak.presenter.LastNewsIPresenter;
 import hr.ml.plavatvornicazadatak.presenter.LastNewsPresenter;
 
@@ -37,7 +38,8 @@ public class LastNewsFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        presenter = new LastNewsPresenter(getActivity().getApplication(), this);
+        NewsRepository repository = new NewsRepository(getActivity().getApplication());
+        presenter = new LastNewsPresenter(repository, this);
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_last_news, container, false);
