@@ -72,6 +72,7 @@ public class LastNewsFragment extends BaseFragment
     public void navigateToArticle(Article article) {
         Bundle bundle = new Bundle();
         bundle.putParcelable("article", article);
+        bundle.putString("title", article.getTitle());
 
         NavController navController = NavHostFragment.findNavController(this);
         navController.navigate(R.id.action_lastNewsFragment_to_storyFragment, bundle);

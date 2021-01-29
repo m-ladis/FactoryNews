@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import hr.ml.plavatvornicazadatak.R;

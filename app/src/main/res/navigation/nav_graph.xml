@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/lastNewsFragment"
         android:name="hr.ml.plavatvornicazadatak.view.LastNewsFragment"
-        android:label="fragment_last_news"
+        android:label="Factory news"
         tools:layout="@layout/fragment_last_news" >
         <action
             android:id="@+id/action_lastNewsFragment_to_storyFragment"
@@ -17,10 +17,15 @@
     <fragment
         android:id="@+id/storyFragment"
         android:name="hr.ml.plavatvornicazadatak.view.StoryFragment"
-        android:label="fragment_story"
+        android:label="{title}"
         tools:layout="@layout/fragment_story" >
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="Factory news"/>
         <action
-            android:id="@+id/action_storyFragment_to_lastNewsFragment"
-            app:destination="@id/lastNewsFragment" />
+            android:id="@+id/action_storyFragment_pop"
+            app:popUpTo="@id/storyFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
