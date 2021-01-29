@@ -84,12 +84,14 @@ public class NewsRepository implements ArticlesRetrievedListener {
                     }
                 } else {
                     Log.d(TAG, "http server error");
+                    articlesRequestListener.articlesRequestFailed();
                 }
             }
 
             @Override
             public void onFailure(Call<NewsResponse> call, Throwable t) {
                 Log.d(TAG, "connection to server failed ");
+                articlesRequestListener.articlesRequestFailed();
             }
         });
     }

@@ -8,4 +8,6 @@ public interface ArticlesRequestListener {
 
     void articlesReadyToShow(List<Article> articles);
 
+    void articlesRequestFailed();
+
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import hr.ml.plavatvornicazadatak.model.entity.Article;
 
-public interface LastNewsIFragment {
+public interface LastNewsIFragment extends BaseIFragment{
 
     void setArticles(List<Article> articles);
 

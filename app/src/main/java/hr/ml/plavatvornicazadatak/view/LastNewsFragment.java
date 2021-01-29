@@ -2,7 +2,6 @@ package hr.ml.plavatvornicazadatak.view;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +21,7 @@ import hr.ml.plavatvornicazadatak.model.repository.NewsRepository;
 import hr.ml.plavatvornicazadatak.presenter.LastNewsIPresenter;
 import hr.ml.plavatvornicazadatak.presenter.LastNewsPresenter;
 
-public class LastNewsFragment extends Fragment
+public class LastNewsFragment extends BaseFragment
         implements LastNewsIFragment, LastNewsFragmentNavigationListener {
 
     private LastNewsIPresenter presenter;

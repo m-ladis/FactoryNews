@@ -10,4 +10,8 @@
         nulla pariatur. Excepteur sint occaecat cupidatat non proident,
         sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
 
+    <string name="connection_alert_dialog_title">Greška</string>
+    <string name="connection_alert_dialog_message">Ups, došlo je do greške.</string>
+    <string name="connection_alert_dialog_button_text">U redu</string>
+
 </resources>

@@ -1,8 +1,6 @@
 package hr.ml.plavatvornicazadatak.presenter;
 
 
-import android.app.Application;
-
 import java.util.List;
 
 import hr.ml.plavatvornicazadatak.listener.ArticlesRequestListener;
@@ -30,6 +28,12 @@ public class LastNewsPresenter implements LastNewsIPresenter, ArticlesRequestLis
     @Override
     public void articlesReadyToShow(List<Article> articles) {
         view.setArticles(articles);
+        view.setProgressBarVisibility(false);
+    }
+
+    @Override
+    public void articlesRequestFailed() {
+        view.showAlertDialog();
         view.setProgressBarVisibility(false);
     }
 }
