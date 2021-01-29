@@ -12,7 +12,8 @@
         <ImageView
             android:id="@+id/story_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"/>
 
         <TextView
             android:id="@+id/story_title"
