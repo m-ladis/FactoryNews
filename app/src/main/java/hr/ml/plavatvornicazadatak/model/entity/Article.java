@@ -18,7 +18,6 @@ public class Article implements Parcelable {
     private String description;
     private String url;
     private String urlToImage;
-    private String uriToImage;
     private Long publishedAt;
 
     public Article() {
@@ -52,16 +51,8 @@ public class Article implements Parcelable {
         this.publishedAt = publishedAt;
     }
 
-    public void setUriToImage(String uriToImage) {
-        this.uriToImage = uriToImage;
-    }
-
     public int getId() {
         return id;
-    }
-
-    public String getUriToImage() {
-        return uriToImage;
     }
 
     public String getAuthor() {
@@ -95,7 +86,6 @@ public class Article implements Parcelable {
         description = in.readString();
         url = in.readString();
         urlToImage = in.readString();
-        uriToImage = in.readString();
         if (in.readByte() == 0) {
             publishedAt = null;
         } else {
@@ -128,7 +118,6 @@ public class Article implements Parcelable {
         dest.writeString(description);
         dest.writeString(url);
         dest.writeString(urlToImage);
-        dest.writeString(uriToImage);
         if (publishedAt == null) {
             dest.writeByte((byte) 0);
         } else {

@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import hr.ml.plavatvornicazadatak.R;
@@ -37,6 +39,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
         Article articleAtPosition = articles.get(position);
 
+        Picasso.get().load(articleAtPosition.getUrlToImage()).into(holder.storyItemImage);
         holder.storyItemTitle.setText(articleAtPosition.getTitle());
     }
 

@@ -56,8 +56,7 @@ public class StoryPresenter implements StoryIPresenter, ArticlesRequestListener 
             Bundle bundle = new Bundle();
             bundle.putParcelable("article", article);
 
-            StoryViewPagerFragment fragment = new StoryViewPagerFragment(
-                    R.layout.story_item);
+            StoryViewPagerFragment fragment = new StoryViewPagerFragment();
             fragment.setArguments(bundle);
             fragments.add(fragment);
         }

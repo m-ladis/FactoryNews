@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.squareup.picasso.Picasso;
+
 import hr.ml.plavatvornicazadatak.R;
 import hr.ml.plavatvornicazadatak.model.entity.Article;
 
@@ -22,8 +24,7 @@ public class StoryViewPagerFragment extends Fragment {
 
     private Article article;
 
-    public StoryViewPagerFragment(int contentLayoutId) {
-        super(contentLayoutId);
+    public StoryViewPagerFragment() {
     }
 
     @Override
@@ -49,7 +50,7 @@ public class StoryViewPagerFragment extends Fragment {
         storyTitle = view.findViewById(R.id.story_title);
         storyDescription = view.findViewById(R.id.story_description);
 
-        // TODO load image
+        Picasso.get().load(article.getUrlToImage()).into(storyImage);
         storyTitle.setText(article.getTitle());
         storyDescription.setText(article.getDescription());
     }
