@@ -45,7 +45,7 @@ public class LastNewsFragment extends BaseFragment
 
         // bind views
         RecyclerView lastNewsRecyclerView = rootView.findViewById(R.id.last_news_recycler_view);
-        progressCircular = rootView.findViewById(R.id.progress_circular);
+        progressCircular = rootView.findViewById(R.id.last_news_progress_circular);
 
         newsAdapter = new NewsAdapter(getContext());
         newsAdapter.setListener(this);
@@ -57,7 +57,7 @@ public class LastNewsFragment extends BaseFragment
     }
 
     @Override
-    public void setArticles(List<Article> articles) {
+    public void updateAdapterDataSet(List<Article> articles) {
         newsAdapter.setArticles(articles);
         newsAdapter.notifyDataSetChanged();
     }
@@ -69,9 +69,9 @@ public class LastNewsFragment extends BaseFragment
     }
 
     @Override
-    public void navigateToArticle(long articleId) {
+    public void navigateToArticle(Article article) {
         Bundle bundle = new Bundle();
-        bundle.putLong("id", articleId);
+        bundle.putParcelable("article", article);
 
         NavController navController = NavHostFragment.findNavController(this);
         navController.navigate(R.id.action_lastNewsFragment_to_storyFragment, bundle);

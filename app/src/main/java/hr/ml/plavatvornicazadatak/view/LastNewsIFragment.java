@@ -6,7 +6,7 @@ import hr.ml.plavatvornicazadatak.model.entity.Article;
 
 public interface LastNewsIFragment extends BaseIFragment{
 
-    void setArticles(List<Article> articles);
+    void updateAdapterDataSet(List<Article> articles);
 
     void setProgressBarVisibility(boolean visibility);
 

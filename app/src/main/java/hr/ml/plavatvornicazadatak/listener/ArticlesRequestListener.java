@@ -6,7 +6,7 @@ import hr.ml.plavatvornicazadatak.model.entity.Article;
 
 public interface ArticlesRequestListener {
 
-    void articlesReadyToShow(List<Article> articles);
+    void articlesReady(List<Article> articles);
 
     void articlesRequestFailed();
 

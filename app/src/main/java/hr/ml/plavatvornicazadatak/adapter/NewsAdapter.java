@@ -67,7 +67,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    lastNewsFragmentNavigationListener.navigateToArticle(getItemId());
+                    Article article = articles.get(getAdapterPosition());
+                    lastNewsFragmentNavigationListener.navigateToArticle(article);
                 }
             });
         }

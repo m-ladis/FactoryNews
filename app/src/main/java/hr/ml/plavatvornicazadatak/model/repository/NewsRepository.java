@@ -24,8 +24,7 @@ import retrofit2.Retrofit;
 public class NewsRepository implements ArticlesRetrievedListener {
     private static final String TAG = "NewsRepository";
 
-    // TODO change to 5*60 second for release
-    private static final int requestRetrofitUpdateAfterSeconds = 10;
+    private static final int requestRetrofitUpdateAfterSeconds = 5 * 60;
 
     private ArticlesRequestListener articlesRequestListener;
 
@@ -47,13 +46,13 @@ public class NewsRepository implements ArticlesRetrievedListener {
         Log.d(TAG, "articlesRetrievedFromDb update required : " + updateFromRetrofitNeeded);
 
         if (updateFromRetrofitNeeded) getAllArticlesFromRESTAndUpdateDb();
-        else articlesRequestListener.articlesReadyToShow(articles);
+        else articlesRequestListener.articlesReady(articles);
     }
 
     @Override
     public void articlesRetrievedFromRESTApi(List<Article> articles) {
         NewsRepositoryUtils.setPublishTimeForArticles(articles);
-        articlesRequestListener.articlesReadyToShow(articles);
+        articlesRequestListener.articlesReady(articles);
 
         insertArticles(articles);
     }

@@ -1,4 +1,11 @@
 package hr.ml.plavatvornicazadatak.view;
 
-public interface StoryIFragment extends BaseIFragment{
+import java.util.List;
+
+public interface StoryIFragment extends BaseIFragment {
+
+    void updateAdapterDataSet(List<StoryViewPagerFragment> fragments, int currentItem);
+
+    void setProgressBarVisibility(boolean visible);
+
 }

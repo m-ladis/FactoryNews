@@ -26,8 +26,8 @@ public class LastNewsPresenter implements LastNewsIPresenter, ArticlesRequestLis
     }
 
     @Override
-    public void articlesReadyToShow(List<Article> articles) {
-        view.setArticles(articles);
+    public void articlesReady(List<Article> articles) {
+        view.updateAdapterDataSet(articles);
         view.setProgressBarVisibility(false);
     }
 
