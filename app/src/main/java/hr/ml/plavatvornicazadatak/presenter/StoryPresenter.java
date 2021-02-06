@@ -46,7 +46,7 @@ public class StoryPresenter implements StoryIPresenter, ArticlesRequestListener 
         int size = articles.size();
 
         for (int i = 0; i < size; i++) {
-            if (articles.get(i).getTitle().equals(currentArticle.getTitle())) return i;
+            if (articles.get(i).getId()== currentArticle.getId()) return i;
         }
         return -1;
     }

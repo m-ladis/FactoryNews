@@ -54,9 +54,9 @@ public class NewsRepository implements ArticlesRetrievedListener {
     @Override
     public void articlesRetrievedFromRESTApi(List<Article> articles) {
         NewsRepositoryUtils.setPublishTimeForArticles(articles);
-        articlesRequestListener.articlesReady(articles);
 
         insertArticlesToDatabase(articles);
+        requestArticles();
     }
 
     public void setArticlesRequestListener(ArticlesRequestListener articlesRequestListener) {
