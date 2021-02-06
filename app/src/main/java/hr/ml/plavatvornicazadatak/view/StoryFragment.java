@@ -1,7 +1,7 @@
 package hr.ml.plavatvornicazadatak.view;
 
+import android.content.Context;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +13,18 @@ import androidx.viewpager.widget.ViewPager;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import hr.ml.plavatvornicazadatak.R;
 import hr.ml.plavatvornicazadatak.adapter.StoryViewPagerAdapter;
+import hr.ml.plavatvornicazadatak.di.component.ArticleFragmentComponent;
 import hr.ml.plavatvornicazadatak.model.entity.Article;
-import hr.ml.plavatvornicazadatak.model.repository.NewsRepository;
 import hr.ml.plavatvornicazadatak.presenter.StoryIPresenter;
-import hr.ml.plavatvornicazadatak.presenter.StoryPresenter;
 
 public class StoryFragment extends BaseFragment implements StoryIFragment {
 
-    private StoryIPresenter presenter;
+    @Inject
+    StoryIPresenter presenter;
 
     private ViewPager storyViewPager;
     private ProgressBar progressCircular;
@@ -33,13 +35,14 @@ public class StoryFragment extends BaseFragment implements StoryIFragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
 
         Bundle bundle = getArguments();
-        Article article = bundle.getParcelable("article");
-
-        presenter = new StoryPresenter(new NewsRepository(getActivity().getApplication()), this, article);
+        if (bundle != null) {
+            Article article = bundle.getParcelable("article");
+            configureDI(article);
+        }
     }
 
     @Override
@@ -73,5 +76,14 @@ public class StoryFragment extends BaseFragment implements StoryIFragment {
     public void setProgressBarVisibility(boolean visible) {
         if (visible) progressCircular.setVisibility(View.VISIBLE);
         else progressCircular.setVisibility(View.GONE);
+    }
+
+    private void configureDI(Article article) {
+        ArticleFragmentComponent fragmentComponent = ((MainActivity) getActivity())
+                .getActivityComponent()
+                .getArticleFragmentComponent()
+                .create(this, article);
+
+        fragmentComponent.inject(this);
     }
 }

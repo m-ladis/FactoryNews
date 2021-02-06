@@ -1,7 +1,8 @@
 package hr.ml.plavatvornicazadatak.presenter;
 
-
 import java.util.List;
+
+import javax.inject.Inject;
 
 import hr.ml.plavatvornicazadatak.listener.ArticlesRequestListener;
 import hr.ml.plavatvornicazadatak.model.entity.Article;
@@ -13,6 +14,7 @@ public class LastNewsPresenter implements LastNewsIPresenter, ArticlesRequestLis
     private LastNewsIFragment view;
     private NewsRepository newsRepository;
 
+    @Inject
     public LastNewsPresenter(NewsRepository newsRepository, LastNewsIFragment view) {
         this.newsRepository = newsRepository;
         this.view = view;

@@ -6,20 +6,19 @@ import android.util.Log;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import hr.ml.plavatvornicazadatak.BuildConfig;
 import hr.ml.plavatvornicazadatak.listener.ArticlesRequestListener;
 import hr.ml.plavatvornicazadatak.listener.ArticlesRetrievedListener;
 import hr.ml.plavatvornicazadatak.model.dao.ArticleDao;
-import hr.ml.plavatvornicazadatak.model.database.FactoryNewsDatabase;
 import hr.ml.plavatvornicazadatak.model.entity.Article;
 import hr.ml.plavatvornicazadatak.model.entity.NewsResponse;
 import hr.ml.plavatvornicazadatak.model.rest.NewsResponseApi;
-import hr.ml.plavatvornicazadatak.model.rest.RetrofitNews;
 import hr.ml.plavatvornicazadatak.util.NewsRepositoryUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class NewsRepository implements ArticlesRetrievedListener {
     private static final String TAG = "NewsRepository";
@@ -28,11 +27,14 @@ public class NewsRepository implements ArticlesRetrievedListener {
 
     private ArticlesRequestListener articlesRequestListener;
 
-    private ArticleDao articleDao;
+    private final ArticleDao articleDao;
 
-    public NewsRepository(Application application) {
-        FactoryNewsDatabase database = FactoryNewsDatabase.getInstance(application);
-        articleDao = database.articleDao();
+    private final NewsResponseApi newsResponseApi;
+
+    @Inject
+    public NewsRepository(NewsResponseApi newsResponseApi, ArticleDao articleDao) {
+        this.articleDao = articleDao;
+        this.newsResponseApi = newsResponseApi;
     }
 
     public void requestArticles() {
@@ -45,7 +47,7 @@ public class NewsRepository implements ArticlesRetrievedListener {
 
         Log.d(TAG, "articlesRetrievedFromDb update required : " + updateFromRetrofitNeeded);
 
-        if (updateFromRetrofitNeeded) getAllArticlesFromRESTAndUpdateDb();
+        if (updateFromRetrofitNeeded) getAllArticlesFromRESTAndUpdateDatabase();
         else articlesRequestListener.articlesReady(articles);
     }
 
@@ -54,21 +56,18 @@ public class NewsRepository implements ArticlesRetrievedListener {
         NewsRepositoryUtils.setPublishTimeForArticles(articles);
         articlesRequestListener.articlesReady(articles);
 
-        insertArticles(articles);
+        insertArticlesToDatabase(articles);
     }
 
     public void setArticlesRequestListener(ArticlesRequestListener articlesRequestListener) {
         this.articlesRequestListener = articlesRequestListener;
     }
 
-    private void insertArticles(List<Article> articles) {
-        new NewsRepository.InsertAllArticles(articleDao).execute(articles.toArray(new Article[0]));
+    private void insertArticlesToDatabase(List<Article> articles) {
+        new InsertAllArticlesToDatabaseTask(articleDao).execute(articles.toArray(new Article[0]));
     }
 
-    private void getAllArticlesFromRESTAndUpdateDb() {
-        Retrofit retrofit = RetrofitNews.getInstance();
-        NewsResponseApi newsResponseApi = retrofit.create(NewsResponseApi.class);
-
+    private void getAllArticlesFromRESTAndUpdateDatabase() {
         Call<NewsResponse> newsResponseCall = newsResponseApi.getResponse(
                 "bbc-news", "top", BuildConfig.API_KEY);
 
@@ -95,11 +94,11 @@ public class NewsRepository implements ArticlesRetrievedListener {
         });
     }
 
-    private static class InsertAllArticles extends AsyncTask<Article, Void, Void> {
+    private static class InsertAllArticlesToDatabaseTask extends AsyncTask<Article, Void, Void> {
 
-        private ArticleDao articleDao;
+        private final ArticleDao articleDao;
 
-        public InsertAllArticles(ArticleDao articleDao) {
+        public InsertAllArticlesToDatabaseTask(ArticleDao articleDao) {
             this.articleDao = articleDao;
         }
 
@@ -114,9 +113,9 @@ public class NewsRepository implements ArticlesRetrievedListener {
 
     private static class GetAllArticles extends AsyncTask<Void, Void, List<Article>> {
 
-        private ArticleDao articleDao;
+        private final ArticleDao articleDao;
 
-        private ArticlesRetrievedListener listener;
+        private final ArticlesRetrievedListener listener;
 
         public GetAllArticles(ArticleDao articleDao, ArticlesRetrievedListener listener) {
             this.articleDao = articleDao;

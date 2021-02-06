@@ -22,18 +22,7 @@ public class StoryViewPagerFragment extends Fragment {
     private TextView storyTitle;
     private TextView storyDescription;
 
-    private Article article;
-
     public StoryViewPagerFragment() {
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        Bundle bundle = getArguments();
-        article = bundle.getParcelable("article");
-
     }
 
     @Nullable
@@ -50,6 +39,14 @@ public class StoryViewPagerFragment extends Fragment {
         storyTitle = view.findViewById(R.id.story_title);
         storyDescription = view.findViewById(R.id.story_description);
 
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            Article article = bundle.getParcelable("article");
+            updateUI(article);
+        }
+    }
+
+    private void updateUI(Article article) {
         Picasso.get().load(article.getUrlToImage()).into(storyImage);
         storyTitle.setText(article.getTitle());
         storyDescription.setText(article.getDescription());

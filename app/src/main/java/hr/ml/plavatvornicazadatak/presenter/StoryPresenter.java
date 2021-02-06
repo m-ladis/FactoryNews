@@ -5,7 +5,8 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.List;
 
-import hr.ml.plavatvornicazadatak.R;
+import javax.inject.Inject;
+
 import hr.ml.plavatvornicazadatak.listener.ArticlesRequestListener;
 import hr.ml.plavatvornicazadatak.model.entity.Article;
 import hr.ml.plavatvornicazadatak.model.repository.NewsRepository;
@@ -18,6 +19,7 @@ public class StoryPresenter implements StoryIPresenter, ArticlesRequestListener 
     private NewsRepository repository;
     private Article currentArticle;
 
+    @Inject
     public StoryPresenter(NewsRepository repository, StoryIFragment view, Article currentArticle) {
         this.repository = repository;
         this.view = view;

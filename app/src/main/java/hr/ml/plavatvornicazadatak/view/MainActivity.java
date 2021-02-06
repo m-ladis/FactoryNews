@@ -7,14 +7,20 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 
+import hr.ml.plavatvornicazadatak.MainApplication;
 import hr.ml.plavatvornicazadatak.R;
+import hr.ml.plavatvornicazadatak.di.component.ActivityComponent;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ActivityComponent activityComponent;
 
     private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        configureDI();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -28,8 +34,19 @@ public class MainActivity extends AppCompatActivity {
                 this, navController);
     }
 
+    private void configureDI() {
+        activityComponent = ((MainApplication) getApplication())
+                .getAppComponent()
+                .getActivityComponent()
+                .create(this);
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         return navController.navigateUp();
+    }
+
+    public ActivityComponent getActivityComponent() {
+        return activityComponent;
     }
 }

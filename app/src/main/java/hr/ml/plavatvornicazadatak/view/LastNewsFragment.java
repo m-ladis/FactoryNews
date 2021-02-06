@@ -1,7 +1,9 @@
 package hr.ml.plavatvornicazadatak.view;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,18 +15,20 @@ import android.widget.ProgressBar;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import hr.ml.plavatvornicazadatak.R;
 import hr.ml.plavatvornicazadatak.adapter.NewsAdapter;
+import hr.ml.plavatvornicazadatak.di.component.FragmentComponent;
 import hr.ml.plavatvornicazadatak.listener.LastNewsFragmentNavigationListener;
 import hr.ml.plavatvornicazadatak.model.entity.Article;
-import hr.ml.plavatvornicazadatak.model.repository.NewsRepository;
 import hr.ml.plavatvornicazadatak.presenter.LastNewsIPresenter;
-import hr.ml.plavatvornicazadatak.presenter.LastNewsPresenter;
 
 public class LastNewsFragment extends BaseFragment
         implements LastNewsIFragment, LastNewsFragmentNavigationListener {
 
-    private LastNewsIPresenter presenter;
+    @Inject
+    LastNewsIPresenter presenter;
 
     private ProgressBar progressCircular;
 
@@ -34,11 +38,20 @@ public class LastNewsFragment extends BaseFragment
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        FragmentComponent fragmentComponent = ((MainActivity) getActivity())
+                .getActivityComponent()
+                .getFragmentComponent()
+                .create(this);
+
+        fragmentComponent.inject(this);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        NewsRepository repository = new NewsRepository(getActivity().getApplication());
-        presenter = new LastNewsPresenter(repository, this);
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_last_news, container, false);
