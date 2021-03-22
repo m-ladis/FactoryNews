@@ -18,3 +18,6 @@ screen i u njemu prikazati single vijesti u
 view pageru držeći se redoslijeda. View
 pager treba predstavljati listu, u kojoj se
 nalaze svi singlovi.
+
+### Preview
+![alt text](readme/plavatvornica-preview.gif)
